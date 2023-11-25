@@ -9,7 +9,7 @@ const connection = mysql.createPool({
   database: process.env.MYSQL_DATABASE
 }).promise()
 
-async function getUsers() {
+export async function getUsers() {
     const [rows] = await connection.query('SELECT * FROM users')
     return rows
 }
@@ -17,13 +17,11 @@ async function getUsers() {
 const users = await getUsers()
 console.log(users)
 
-async function createUser(idusers, firstname, lastname) {
+export async function createUser(idusers, firstname, lastname) {
     const result = await connection.query(`
     INSERT INTO users (idusers, lastname, firstname)
     VALUES (?, ?, ?)
     `, [idusers, firstname, lastname])
-    return result
+    const id = result.insertId
+    return getUsers(id)
 }
-
-const result = await createUser(7, 'John', 'Doe')
-console.log(result)

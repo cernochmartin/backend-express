@@ -1,12 +1,12 @@
-const express = require('express')()
-const app = express
+const express = require('express')
+const app = express()
 const PORT = 8082
 
 app.use(express.json())
 
 app.listen(
     PORT,
-    () => console.log(`It's listening on port: ${PORT}`)
+    () => console.log(`Listening on port: ${PORT}`)
 )
 
 app.get('/users', (req, res) => {

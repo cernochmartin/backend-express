@@ -16,3 +16,14 @@ async function getUsers() {
 
 const users = await getUsers()
 console.log(users)
+
+async function createUser(idusers, firstname, lastname) {
+    const result = await connection.query(`
+    INSERT INTO users (idusers, lastname, firstname)
+    VALUES (?, ?, ?)
+    `, [idusers, firstname, lastname])
+    return result
+}
+
+const result = await createUser(7, 'John', 'Doe')
+console.log(result)

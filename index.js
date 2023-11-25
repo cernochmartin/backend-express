@@ -21,7 +21,7 @@ app.post('/users/:id', (req, res) => {
     const { name } = req.body
     const { surname } = req.body
 
-    if (!name && !surname) {
+    if (!name || !surname) {
         res.status(418).send({ message: 'Input name and surname!' })
     }
 
